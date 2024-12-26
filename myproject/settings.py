@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
-from dotenv import load_dotenv
+import os, subprocess
+# from dotenv import load_dotenv
 
-load_dotenv()  # Load environment variables from .env file
+# Source ~/.bashrc to load the environment variables
+subprocess.call(['bash', '-i', '-c', 'source ~/.bashrc && env'])
+
+# load_dotenv()  # Load environment variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
