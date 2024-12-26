@@ -140,3 +140,59 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# settings.py
+
+LOGGING = {
+    'version': 1,  # Use version 1 of the logging configuration
+    'disable_existing_loggers': False,  # Don't disable existing loggers
+
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',  # Using the '{' style for placeholders
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+
+    'handlers': {
+        # Console handler for outputting log messages to the console
+        'console': {
+            'level': 'ERROR',  # Only capture ERROR and above level messages
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+
+        # File handler for saving logs to a file
+        'file': {
+            'level': 'ERROR',  # Capture ERROR and above level messages
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs/errors.log',  # Log file where errors are stored
+            'formatter': 'verbose',
+        },
+    },
+
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],  # Use console and file handlers
+            'level': 'ERROR',  # Capture logs of ERROR level and above
+            'propagate': True,  # Propagate the log to parent loggers
+        },
+
+        'django.request': {
+            'handlers': ['file'],  # Use the file handler for request-related errors
+            'level': 'ERROR',  # Capture ERROR level logs related to HTTP requests
+            'propagate': False,  # Don't propagate these logs further
+        },
+
+        'django.db.backends': {
+            'handlers': ['file'],  # Log database-related errors to a file
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
