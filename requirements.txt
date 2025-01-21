@@ -1,3 +1,7 @@
 django
-pymysql
+#pymysql
 python-dotenv
+celery
+flower
+redis
+requests

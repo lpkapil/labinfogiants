@@ -22,4 +22,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),  # Include myapp's URLs (maps '' to myapp.urls)
+    path('', include('app_wp_plugin_server.urls')),  # Include myapp's URLs (maps '' to myapp.urls)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

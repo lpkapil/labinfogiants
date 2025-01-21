@@ -27,10 +27,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-oni)t#+bq1(ywn3%x7qxyj-%z)o!tkd44@y(rung^!9=kud7=+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['147.93.20.194', 'localhost', '127.0.0.1', 'lab.infogiants.com']
+ALLOWED_HOSTS = ['147.93.20.194', 'localhost', '127.0.0.1', 'lab.infogiants.com', 'measured-capital-cod.ngrok-free.app']
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://measured-capital-cod.ngrok-free.app',
+    'https://measured-capital-cod.ngrok-free.app'
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "myapp",
+    'myapp',
+    'app_wp_plugin_server'
 ]
 
 MIDDLEWARE = [
@@ -81,14 +86,22 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
-        'USER': 'root',
-        'PASSWORD': 'root123',
-        'HOST': '127.0.0.1',
-        'PORT': 3306,
+        'ENGINE': 'django.db.backends.sqlite3',  # Use SQLite database
+        'NAME': BASE_DIR / 'db.sqlite3',  # Path to the SQLite database file
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'django',
+#         'USER': 'root',
+#         'PASSWORD': 'root123',
+#         'HOST': '127.0.0.1',
+#         'PORT': 3306,
+#     }
+# }
 
 
 # Password validation
@@ -135,6 +148,8 @@ STATICFILES_DIRS = [
 # The directory where static files will be collected for production
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

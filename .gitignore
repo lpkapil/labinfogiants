@@ -4,3 +4,8 @@
 deploy.sh
 *.log
 /staticfiles/*
+/scripts/*
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
+*.sqlite3
